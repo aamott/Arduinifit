@@ -85,3 +85,10 @@ Not all motor controllers will be the same. To identify each pin:
 | (T) Tachometer   | Output. Not connected/infinite Ohms or same as incline sense.
 | (9) +12v         | 12v. 
 | (G) Ground       | 
+
+
+# TODO
+- [ ] Safety key support
+- [ ] Display to show current speed
+- [ ] Serial control (USB)
+- [ ] Incline angle? Explore this. 
