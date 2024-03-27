@@ -54,7 +54,7 @@ Not all motor controllers will be the same. To identify each pin:
 
 2. Next, switch to the ohmmeter setting and touch each pin. Note any connections near 0 ohms (that aren't ground) as these are probably outputs pulled low. You may have found the incline sense and/or speed tachometer, if connected. 
 
---- You should now know Incline Sense, Speed Tachometer, 12v, Gnd ---
+*--- You should now know Incline Sense, Speed Tachometer, 12v, Gnd ---*
 
 3. Next, upload the code to the Arduino and turn up the speed at least halfway. This will start the 20hz PWM signal. Check with the multimeter. It should either fluctuate voltage or read a constant ~2.5-4 volts. 
     - If it's 0v, turn up the potentiometer and check your connections. 
@@ -67,11 +67,11 @@ Not all motor controllers will be the same. To identify each pin:
     - If the incline changes, note the direction
     - If none of the pins respond, check your connections and turn the speed up/down. Check that the potentiometer is connected to both ground and 5v on the Arduino. 
 
---- You should now know treadmill Power/Speed ---
+*--- You should now know treadmill Power/Speed ---*
 
 6. Apply 5v to the remaining connections one at a time to identify Incline Up and Down. 
 
---- You should now know Incline Up and Down ---
+*--- You should now know Incline Up and Down ---*
 
 ### Pinout and identifiers
 
