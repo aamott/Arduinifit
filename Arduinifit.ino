@@ -36,24 +36,24 @@
 /************************************************
 * User Config
 */
-// outputs
+// Outputs
 #define speedPin 11
 #define inclineUpPin 9
 #define inclineDownPin 10
 
-// inputs
+// Inputs
 #define speedPotPin A2
 #define inclineUpBtn 4  // Buttons should be high by default, low when pushed
 #define inclineDownBtn 3
-#define inclineBtnInvert  // set to true if the button is low when pressed
+#define inclineBtnInvert  // Uncomment if the button is low when pressed. Comment if button is high when pressed.
 // #define inclineSensePin 8 // switches on/off every step of incline. Not implemented yet.
-#define safetyKeyPin 7  // Safety key is a pin that outputs 3-5v when the key is inserted/attached. -1 to disable.
+#define safetyKeyPin -1  // Safety key is a pin that outputs 3-5v when the key is inserted/attached. -1 to disable.
 
 // Max duty cycle defines max treadmill speed
 #define maxDutyCycle 0.55
 
 // PWM timing
-const int hertz = 20;
+#define hertz 20
 
 /************************************************
 * End User Config
