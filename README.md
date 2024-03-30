@@ -87,9 +87,16 @@ Not all motor controllers will be the same. To identify each pin:
 | (G) Ground       | 
 
 
+
+# Contributing
+If you want to contribute (not that this is super niche...) feel free to write up an issue and fork the code. If you want to try another treadmill, put in an issue with the treadmill model, a picture of the board if available (close up on the pins is useful), and the board serial number. You can update progress there and I'll put whatever changes are needed on this end to make it easier. 
+
+Here's the wokwi simulation I use for debugging, using LEDs instead of motors: https://wokwi.com/projects/393810925685210113
+
+
 # TODO
 - [ ] Safety key support
-- [ ] Display to show current speed
-- [ ] Serial control (USB)
+- [ ] Display to show current speed and incline
+- [ ] Serial control and status
 - [ ] Incline angle? Explore this. 
-- [ ] Detect if walking stopped
+- [ ] Detect if walking stopped using an accelerometer
