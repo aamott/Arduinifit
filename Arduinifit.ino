@@ -47,6 +47,7 @@ bool speedPinState = LOW;
 unsigned long currentTime;
 unsigned long previousTime = 0;
 unsigned long previousOnTime = 0;
+bool safetyTriggered;
 
 void setup() {
   // Outputs
@@ -59,24 +60,37 @@ void setup() {
   pinMode(speedPotPin, INPUT);
   pinMode(inclineUpBtn, INPUT_PULLUP);
   pinMode(inclineDownBtn, INPUT_PULLUP);
+
+  safetyTriggered = false;
 }
 
 void loop() {
   currentTime = millis();
 
-  if (safetyKeyPin == -1 || digitalRead(safetyKeyPin) == HIGH) {
+  if ((safetyKeyPin == -1 || digitalRead(safetyKeyPin) == HIGH ) && !safetyTriggered) {
     // Safety key is not installed or is not pressed.
     // Run the treadmill normally
     runTreadmill();
+  } else if (safetyTriggered) {  // safety has been triggered
+    // require speed to be set to 0 to restart
+    if (analogRead(speedPotPin) < speedAnalogThreshold) {
+      // reset safety
+      safetyTriggered = false;
+    }
   } else {
     // Safety key is installed and is pressed.
     // Stop the treadmill
     digitalWrite(speedPin, LOW);
     digitalWrite(inclineUpPin, false);
     digitalWrite(inclineDownPin, false);
+    safetyTriggered = true;
   }
 }
 
+/***********************
+ * runTreadmill
+ * main treadmilll loop
+*/
 void runTreadmill() {
   // Incline control - when buttons are pressed, state is low
   if (invert digitalRead(inclineUpBtn) && invert !digitalRead(inclineDownBtn)) {  // Up Pressed, down released
@@ -95,7 +109,7 @@ void runTreadmill() {
   // Speed control
   int speedPotValue = analogRead(speedPotPin);
 
-  if (speedPotValue > 40) {  // noise cutoff
+  if (speedPotValue > speedAnalogThreshold) {  // noise cutoff
 
     // Duty Cycle. A loop should last totalMillisPerLoop milliseconds. The pin should be HIGH for onTime milliseconds.
     if (currentTime - previousTime <= onTime && speedPinState == LOW) {

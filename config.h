@@ -16,6 +16,8 @@
 
 // Max duty cycle defines max treadmill speed
 #define maxDutyCycle 0.55
+// Speed input minimum threshold is the minimum analog value that will be required to start the treadmill. 0-1023.
+#define speedAnalogThreshold 40
 
 // PWM timing
 #define hertz 20
