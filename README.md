@@ -92,3 +92,4 @@ Not all motor controllers will be the same. To identify each pin:
 - [ ] Display to show current speed
 - [ ] Serial control (USB)
 - [ ] Incline angle? Explore this. 
+- [ ] Detect if walking stopped
