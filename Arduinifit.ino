@@ -33,21 +33,33 @@
  * the potentiometer.
  ****************************************************************/
 
+/************************************************
+* User Config
+*/
 // outputs
 #define speedPin 11
 #define inclineUpPin 9
 #define inclineDownPin 10
+
 // inputs
-// #define inclineSensePin 8 // switches on/off every half step of incline
 #define speedPotPin A2
-#define inclineUpBtn 4
+#define inclineUpBtn 4 // Buttons should be high by default, low when pushed
 #define inclineDownBtn 3
+// #define inclineSensePin 8 // switches on/off every step of incline. Not implemented yet. 
+// #define safetyKeyPin 7 // Safety key is a pin that outputs 3-5v when the key is inserted/attached. Not implemented yet. 
 
 // Max duty cycle defines max treadmill speed
 #define maxDutyCycle 0.55
 
 // PWM timing
 const int hertz = 20;
+
+/************************************************
+* End User Config
+*************************************************/
+
+
+
 const int totalMillisPerLoop = 1000 / hertz;  // how long each pwm cycle should last. Duty cycle is defined by how much of this time the pin is on or off.
 unsigned long onTime = 0;
 bool speedPinState = LOW;
@@ -85,18 +97,7 @@ void loop() {
     digitalWrite(inclineDownPin, false);
   }
 
-  //   // manage speed
-  //   int speedPotValue = analogRead(speedPotPin);
-  //   if (speedPotValue > 40) { // cut off below 40 to avoid noise
-  //     int onMillis = map(speedPotValue, 0, 1023, 5, totalMillisPerLoop * maxDutyCycle); // set PWM based on potentiometer
-
-  //     // Pulse pin based on duty cycle
-  //     digitalWrite(speedPin, HIGH);
-  //     delay(onMillis);
-  //     digitalWrite(speedPin, LOW);
-  //     delay(totalMillisPerLoop - onMillis);
-  //   }
-
+  // Speed control
   int speedPotValue = analogRead(speedPotPin);
 
   if (speedPotValue > 40) {  // noise cutoff
