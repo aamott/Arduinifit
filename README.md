@@ -1,7 +1,7 @@
 # Arduinifit
 Arduinifit is a firmware to control the iFit Proform Pro 5000 (and probably other) treadmills using the original motor drivers. 
 
-# About
+# About the Treadmill
 The iFit Proform Pro 5000 is made of 3 primary components:
 - Motor hardware (elevation and speed) 
 - Motor driver (MC2100, one driver for incline and speed)
@@ -41,6 +41,7 @@ Incline up and down *must* be pulled low by default, and both must be connected 
 - Some wiring
 
 ## Arduino Installation
+Configurations are stored in config.h. There are comments explaining what each value does. You can implement of leave out certain features (such as a safety key) based on your preference.
 
 1. Open `arduinifit` file in the Arduino IDE and upload it to your Arduino.
 
@@ -100,3 +101,4 @@ Here's the wokwi simulation I use for debugging, using LEDs instead of motors: h
 - [ ] Serial control and status
 - [ ] Incline angle? Explore this. 
 - [ ] Detect if walking stopped using an accelerometer
+- [ ] High/low speed modes wth safety
