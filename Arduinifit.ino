@@ -43,10 +43,10 @@
 
 // inputs
 #define speedPotPin A2
-#define inclineUpBtn 4 // Buttons should be high by default, low when pushed
+#define inclineUpBtn 4  // Buttons should be high by default, low when pushed
 #define inclineDownBtn 3
-// #define inclineSensePin 8 // switches on/off every step of incline. Not implemented yet. 
-// #define safetyKeyPin 7 // Safety key is a pin that outputs 3-5v when the key is inserted/attached. Not implemented yet. 
+// #define inclineSensePin 8 // switches on/off every step of incline. Not implemented yet.
+#define safetyKeyPin 7  // Safety key is a pin that outputs 3-5v when the key is inserted/attached. -1 to disable.
 
 // Max duty cycle defines max treadmill speed
 #define maxDutyCycle 0.55
@@ -83,6 +83,20 @@ void setup() {
 void loop() {
   currentTime = millis();
 
+  if (safetyKeyPin == -1 || digitalRead(safetyKeyPin) == HIGH) {
+    // Safety key is not installed or is not pressed.
+    // Run the treadmill normally
+    runTreadmill();
+  } else {
+    // Safety key is installed and is pressed.
+    // Stop the treadmill
+    digitalWrite(speedPin, LOW);
+    digitalWrite(inclineUpPin, false);
+    digitalWrite(inclineDownPin, false);
+  }
+}
+
+void runTreadmill() {
   // Incline control - when buttons are pressed, state is low
   if (!digitalRead(inclineUpBtn) && digitalRead(inclineDownBtn)) {  // Up Pressed, down released
     digitalWrite(inclineUpPin, true);
