@@ -45,6 +45,7 @@
 #define speedPotPin A2
 #define inclineUpBtn 4  // Buttons should be high by default, low when pushed
 #define inclineDownBtn 3
+#define inclineBtnInvert  // set to true if the button is low when pressed
 // #define inclineSensePin 8 // switches on/off every step of incline. Not implemented yet.
 #define safetyKeyPin 7  // Safety key is a pin that outputs 3-5v when the key is inserted/attached. -1 to disable.
 
@@ -58,7 +59,11 @@ const int hertz = 20;
 * End User Config
 *************************************************/
 
-
+#ifdef inclineBtnInvert
+#define invert !
+#else
+#define invert
+#endif
 
 const int totalMillisPerLoop = 1000 / hertz;  // how long each pwm cycle should last. Duty cycle is defined by how much of this time the pin is on or off.
 unsigned long onTime = 0;
@@ -98,12 +103,12 @@ void loop() {
 
 void runTreadmill() {
   // Incline control - when buttons are pressed, state is low
-  if (!digitalRead(inclineUpBtn) && digitalRead(inclineDownBtn)) {  // Up Pressed, down released
+  if (invert digitalRead(inclineUpBtn) && invert !digitalRead(inclineDownBtn)) {  // Up Pressed, down released
     digitalWrite(inclineUpPin, true);
     digitalWrite(inclineDownPin, false);
   }
   // incline Down pressed
-  else if (!digitalRead(inclineDownBtn) && digitalRead(inclineUpBtn)) {  // down pressed, up released
+  else if (invert digitalRead(inclineDownBtn) && invert !digitalRead(inclineUpBtn)) {  // down pressed, up released
     digitalWrite(inclineUpPin, false);
     digitalWrite(inclineDownPin, true);
   } else {  // no buttons pressed
